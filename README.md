@@ -1,6 +1,6 @@
 # Multi-User Blogging Platform  
 
-A simple multi-user blogging platform built using Django, allowing users to create, edit, and manage blog posts securely. The platform features a user authentication system and scalable architecture for future enhancements.
+A simple multi-user blogging platform built using Django, allowing users to create, edit, and manage blog posts.
 
 ## Features  
 
@@ -13,7 +13,7 @@ A simple multi-user blogging platform built using Django, allowing users to crea
 
 - **Backend**: Django  
 - **Database**: SQLite (or your preferred database, e.g., PostgreSQL)  
-- **Frontend**: HTML, CSS, and Bootstrap (or other front-end frameworks, if applicable)  
+- **Frontend**: HTML, CSS, and Bootstrap
 - **Authentication**: Django's built-in user authentication system  
 
 ## Installation  
@@ -22,7 +22,7 @@ To get started with the project locally, follow these steps:
 
 1. Clone the repository:
    ```bash  
-   git clone git remote add origin https://github.com/khushaalll/EchoBlog.git '''
+   git clone git remote add origin https://github.com/khushaalll/EchoBlog.git
 2. python manage.py migrate
 3. python manage.py runserver
 5. On your browser go to: http://127.0.0.1:8000/
