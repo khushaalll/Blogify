@@ -7,7 +7,7 @@ from datetime import datetime
 class Blog(models.Model):
     STATUS_CHOICES = [
         ('draft', 'Draft'),
-        ('published', 'Published'),
+        ('post', 'Post'),
         ('archived', 'Archived'),
     ]
 
@@ -17,7 +17,7 @@ class Blog(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
     tags = models.CharField(max_length=100, blank=True)  # Comma-separated tags
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='post')
     cover_image = models.ImageField(upload_to='blog_images/', blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True)
     views_count = models.PositiveIntegerField(default=0)
@@ -41,3 +41,12 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Like(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('user', 'blog')

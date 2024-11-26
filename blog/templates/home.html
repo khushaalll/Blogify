@@ -1,24 +1,25 @@
 {% extends 'base.html' %}
-
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<h1>All Blogs</h1>
+<div class="home-container">
+    <h1 class="page-title">All Blogs</h1>
 
-{% if user.is_authenticated %}
-    <a href="{% url 'create_blog' %}" class="btn">Create Blog</a>
-{% else %}
-    <p><a href="{% url 'login' %}">Log in</a> to create a blog.</p>
-{% endif %}
-
-{% for blog in blogs %}
-    <div class="blog">
-        <h2>{{ blog.title }}</h2>
-        <p>By {{ blog.author.username }} | {{ blog.timestamp }}</p>
-        <p>{{ blog.content|truncatechars:200 }}</p>
-        <p><strong>Tags:</strong> {{ blog.tags }}</p>
-        <p><strong>Views:</strong> {{ blog.views_count }} | <strong>Likes:</strong> {{ blog.likes_count }}</p>
-    </div>
-    <hr>
-{% endfor %}
+    <section class="blog-list">
+        {% for blog in blogs %}
+            <div class="blog-card">
+                <h2 class="blog-title">{{ blog.title }}</h2>
+                <p class="blog-meta">By <strong>{{ blog.author.username }}</strong></p>
+                <p class="blog-content">{{ blog.content|truncatechars:150 }}</p>
+                <div class="blog-footer">
+                    <p><strong>Tags:</strong> {{ blog.tags }}</p>
+                    <p><strong>Views:</strong> {{ blog.views_count }} | <strong>Likes:</strong> {{ blog.likes_count }}</p>
+                </div>
+                <a href="{% url 'view_blog' blog.id %}" class="button view-blog-btn">View More</a>
+            </div>
+        {% empty %}
+            <p>No blogs available. Be the first to <a href="{% url 'create_blog' %}">create a blog</a>!</p>
+        {% endfor %}
+    </section>
+</div>
 {% endblock %}

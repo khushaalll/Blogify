@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+
+{% block content %}
+<div class="blog-detail-container">
+    <h1>{{ blog.title }}</h1>
+    <p class="blog-meta">By <strong>{{ blog.author.username }}</strong> | {{ blog.timestamp }}</p>
+    <p>{{ blog.content }}</p>
+    <div class="blog-footer">
+        <p><strong>Tags:</strong> {{ blog.tags }}</p>
+        <form method="POST" action="{% url 'like_blog' blog.id %}">
+    {% csrf_token %}
+    <button type="submit">
+        {% if user.is_authenticated %}
+            {% if user_liked %}
+                Unlike
+            {% else %}
+                Like
+            {% endif %}
+        {% else %}
+            Log in to like the post
+        {% endif %}
+    </button>
+</form>
+        <p><strong>Views:</strong> {{ blog.views_count }} | <strong>Likes:</strong> {{ blog.likes_count }}</p>
+    </div>
+
+    <!-- Option to go back to the previous page -->
+    <a href="{{ request.META.HTTP_REFERER|default:'#' }}" class="button back-home-btn">Go Back</a>
+
+    <!-- Option to edit if the user is the author -->
+    {% if user == blog.author %}
+        <a href="{% url 'edit_blog' blog.id %}" class="button edit-blog-btn">Edit Blog</a>
+    {% endif %}
+</div>
+{% endblock %}

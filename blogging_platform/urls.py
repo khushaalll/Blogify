@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+
 ]
 
 if settings.DEBUG:
