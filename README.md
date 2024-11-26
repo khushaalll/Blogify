@@ -22,7 +22,7 @@ To get started with the project locally, follow these steps:
 
 1. Clone the repository:
    ```bash  
-   git clone git remote add origin https://github.com/khushaalll/EchoBlog.git
+   git clone git remote add origin https://github.com/khushaalll/Blogify.git
 2. python manage.py migrate
 3. python manage.py runserver
 5. On your browser go to: http://127.0.0.1:8000/
